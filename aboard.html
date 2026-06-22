@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>@board建廠工進</title>
+    <!-- 引入 Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F5F5F3;
+            --primary-dark: #0f172a;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --table-bg: #ffffff;
+            --header-bg: #f8fafc;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-dark);
+            margin: 0;
+            padding: 12px; /* 縮減外圍留白 */
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        /* 標題區塊 - 固定在頁面最上方，不隨表格滾動 */
+        .header-container {
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 100;
+            width: 100%;
+            margin-bottom: 12px; /* 減少與表格間距 */
+            border-bottom: 3px solid var(--primary-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 6px;
+        }
+
+        .header-left h1 {
+            font-size: 32px; /* 略微縮小標題 */
+            font-weight: 900;
+            font-style: italic;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header-left p {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 篩選器樣式 */
+        .filter-select {
+            padding: 4px 8px; /* 緊湊型按鈕 */
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid var(--primary-dark);
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .date-badge {
+            font-size: 18px; /* 縮小日期標籤 */
+            font-weight: bold;
+            background-color: #000000;
+            color: #ffffff;
+            padding: 4px 12px;
+            white-space: nowrap;
+        }
+
+        /* 表格樣式 */
+        .table-wrapper {
+            background-color: var(--table-bg);
+            padding: 8px; /* 縮減表格外框內襯 */
+            border-radius: 12px; /* 配合緊湊感縮小圓角 */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            border: 1px solid var(--border-color);
+        }
+
+        /* 實現滾動時表頭置頂固定 (Sticky Header) */
+        th {
+            position: sticky;
+            top: 57px; /* 根據 header-container 的高度進行定位貼齊 */
+            background-color: var(--header-bg);
+            color: #475569;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+            padding: 8px 6px; /* 縮減縱向與橫向 Padding */
+            z-index: 10;
+            box-shadow: inset 0 -1px 0 var(--border-color), inset 0 1px 0 var(--border-color);
+        }
+
+        td {
+            padding: 6px 8px; /* 顯著縮減單元格上下、左右間距，提高縱向密度 */
+            border: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .td-building {
+            background-color: #f1f5f9;
+            font-weight: 900;
+            font-size: 14px;
+            color: var(--text-main);
+            text-align: center;
+        }
+
+        /* 廠區超連結樣式：維持大老闆報告所需的乾淨專業感，隱藏底線並設定深色，滑過時顯示底線 */
+        .building-link {
+            color: var(--primary-dark);
+            text-decoration: none;
+        }
+        .building-link:hover {
+            text-decoration: underline;
+        }
+
+        .td-pm {
+            font-weight: bold;
+            font-size: 13px;
+            color: #334155;
+            text-align: center;
+        }
+
+        .td-task {
+            font-weight: 900;
+            font-size: 13px;
+            color: #000;
+        }
+
+        /* 狀態文字與顏色設定 */
+        .status-text {
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+            display: block;
+        }
+        .status-ontime {
+            color: #16a34a; /* On Time 顯示綠色 */
+        }
+        .status-delay {
+            color: #dc2626; /* Delay 顯示紅色 */
+        }
+
+        /* AI 分析區塊 */
+        .ai-box {
+            background-color: #f8fafc;
+            padding: 10px; /* 縮減內部間距 */
+            border: 1px solid #e2e8f0;
+        }
+
+        .ai-reason {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .ai-summary {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 標題與篩選區塊 -->
+    <div class="header-container">
+        <div class="header-left">
+            <h1>建廠@Board Review Agent</h1>
+            <p>Powered by AI Agent - Pensieve</p>
+        </div>
+        <div class="header-right">
+            <!-- 廠區篩選 -->
+            <select id="building-filter" class="filter-select" onchange="renderTable()">
+                <option value="ALL">All Buildings</option>
+            </select>
+            <!-- 狀態篩選 (On Time / Delay) -->
+            <select id="status-filter" class="filter-select" onchange="renderTable()">
+                <option value="ALL">All Status</option>
+                <option value="On Time">On Time</option>
+                <option value="Delay">Delay</option>
+            </select>
+            <!-- AI 判斷篩選 -->
+            <select id="ai-filter" class="filter-select" onchange="renderTable()">
+                <option value="ALL">All AI</option>
+                <option value="合理">合理</option>
+                <option value="不合理">不合理</option>
+                <option value="提醒">提醒</option>
+            </select>
+            <div id="report-date" class="date-badge">--</div>
+        </div>
+    </div>
+
+    <!-- 數據表格區塊 -->
+    <div class="table-wrapper">
+        <table id="main-table">
+            <thead>
+                <tr>
+                    <th width="12%">Building</th>
+                    <th width="8%">PM</th>
+                    <th width="22%">關鍵 Task / Issue</th>
+                    <th width="6%">進度狀態</th>
+                    <th width="26%">Comment</th>
+                    <th width="26%">AI 判斷</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <tr>
+                    <td colspan="6" align="center" style="padding: 20px; color: #64748b;">數據載入中...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let MAIN_DATA = null;
+        // 前端宣告顯示的新名稱
+        const BUILDING_ORDER = ["K27-P2", "K61-P1(KL I)", "K71(FAB 5)", "K51(RW)", "K61-P2(KL II)","楠電(K19A)","K18B","Zone 3","K3B"];
+
+        // 廠區對應的網址設定
+        const URL_MAP = {
+            "K3B": "https://atboard.kh.asegroup.com/project/ec58161b-9928-4f9c-b333-bca653b25082/manage",
+            "K27-P2": "https://atboard.kh.asegroup.com/project/af9cc3f2-b74b-480c-85aa-e5fda84c7f4d/manage",
+            "K61-P1(KL I)": "https://atboard.kh.asegroup.com/project/4e06a504-46a9-4e0c-bf66-7a44def8e4ed/manage",
+            "K71(FAB 5)": "https://atboard.kh.asegroup.com/project/46d6f1fc-38eb-456f-896c-de3976cf29c4/manage",
+            "K51(RW)": "https://atboard.kh.asegroup.com/project/7fca7b34-f16d-45d7-9c7b-4f980a2b4173/manage",
+            "K61-P2(KL II)": "https://atboard.kh.asegroup.com/project/513cdb8f-4c10-49cc-b646-dffcd550a941/manage",
+"楠電(K19A)": "https://atboard.kh.asegroup.com/project/a924daef-aba7-4a65-9389-0bf3b8ba4a5d/manage",
+"K18B":"https://atboard.kh.asegroup.com/project/91120be8-e07f-4f57-be15-abb9f21ab271/manage",
+"Zone 3":"https://atboard.kh.asegroup.com/project/4ce0575d-d166-48c2-b1c7-4b32316a6e1d/manage"
+        };
+
+        async function fetchResources() {
+            const timestamp = Date.now();
+            try {
+                const mainRes = await fetch(`data/building_aboard.json?t=${timestamp}`, { cache: 'no-store' });
+                const text = await mainRes.text();
+                const cleanText = text.includes('<script>') ? text.slice(0, text.indexOf('<script>')).trim() : text;
+                MAIN_DATA = JSON.parse(cleanText);
+                
+                // 初始化廠區篩選下拉選單
+                const filter = document.getElementById('building-filter');
+                BUILDING_ORDER.forEach(b => {
+                    const opt = document.createElement('option');
+                    opt.value = b;
+                    opt.textContent = b;
+                    filter.appendChild(opt);
+                });
+
+            } catch (e) {
+                console.error("Data load failed:", e);
+                MAIN_DATA = { result: { report_date: "ERROR", progress: {} } };
+            }
+        }
+
+        function renderTable() {
+            if (!MAIN_DATA || !MAIN_DATA.result) return;
+            
+            const res = MAIN_DATA.result;
+            const progress = res.progress || {};
+            const jsonKeys = Object.keys(progress);
+            
+            // 獲取當前所有篩選器的值
+            const filterBuilding = document.getElementById('building-filter').value;
+            const filterStatus = document.getElementById('status-filter').value;
+            const filterAi = document.getElementById('ai-filter').value;
+            
+            document.getElementById('report-date').innerText = res.report_date || '--';
+
+            let flattened = [];
+            BUILDING_ORDER.forEach(target => {
+                // 1. 廠區篩選過濾
+                if (filterBuilding !== "ALL" && target !== filterBuilding) return;
+
+                // 精準對應與模糊解析比對
+                let matchedKey = jsonKeys.find(k => {
+                    if (target === "K61-P2(KL II)") {
+                        return k.includes("KL II") && k.includes("2期");
+                    }
+
+                    if (target.includes("KL I") && !target.includes("KL II") && k.includes("KL II")) return false;
+                    if (k.includes("KL I") && !k.includes("KL II") && target.includes("KL II")) return false;
+
+                    const targetTokens = target.match(/[A-Za-z0-9\u4e00-\u9fa5]+/g) || [];
+                    const validTokens = targetTokens.filter(token => token.length > 1 || token === "I" || token === "II");
+
+                    return validTokens.some(token => k.includes(token));
+                });
+
+                if (matchedKey && progress[matchedKey]) {
+                    progress[matchedKey].forEach(item => {
+                        let mappedStatus = 'On Time';
+                        if (item.INDICATOR && (item.INDICATOR.includes('紅') || item.INDICATOR.includes('黃'))) {
+                            mappedStatus = 'Delay';
+                        } else if (item.INDICATOR && item.INDICATOR.includes('綠')) {
+                            mappedStatus = 'On Time';
+                        } else {
+                            mappedStatus = item.INDICATOR || '-';
+                        }
+
+                        // 2. 進度狀態篩選過濾
+                        if (filterStatus !== "ALL" && mappedStatus !== filterStatus) return;
+
+                        // 3. AI 判斷篩選過濾
+                        const aiReasonable = item.REASONABLE || '';
+                        if (filterAi !== "ALL") {
+                            if (filterAi === "合理") {
+                                if (aiReasonable.includes("不合理") || !aiReasonable.includes("合理")) return;
+                            } else {
+                                if (!aiReasonable.includes(filterAi)) return;
+                            }
+                        }
+
+                        // 通過所有篩選才推入顯示陣列
+                        flattened.push({
+                            group: target,
+                            sourceProject: matchedKey,
+                            pm: item.PM_NAME || '-',
+                            task: item.TASK || '-',
+                            statusText: mappedStatus,
+                            comment: item.PROGRESS || '',
+                            ai_summary: item.SUMMARY || '',
+                            ai_reasonable: aiReasonable
+                        });
+                    });
+                }
+            });
+
+            if (flattened.length === 0) {
+                document.getElementById('table-body').innerHTML = '<tr><td colspan="6" align="center" style="padding:20px;">查無符合篩選條件的資料</td></tr>';
+                return;
+            }
+
+            // 重新計算合併儲存格 (Rowspan) 邏輯
+            const bSpans = {};
+            const pmSpans = {};
+            flattened.forEach(row => {
+                bSpans[row.group] = (bSpans[row.group] || 0) + 1;
+                const pk = row.group + "_" + row.pm;
+                pmSpans[pk] = (pmSpans[pk] || 0) + 1;
+            });
+
+            let bRendered = {}, pmRendered = {};
+            let html = '';
+
+            flattened.forEach(d => {
+                const isUnreasonable = d.ai_reasonable.includes('不合理');
+
+                // 移除整行 tr 的 row-unreasonable class
+                html += `<tr>`;
+                
+                if (!bRendered[d.group]) {
+                    const targetUrl = URL_MAP[d.group] || '#';
+                    
+                    html += `<td class="td-building" rowspan="${bSpans[d.group]}">
+                                <a href="${targetUrl}" target="_blank" class="building-link">
+                                    <div>${d.group}</div>
+                                </a>
+                                <div style="font-size: 11px; color: #64748b; font-weight: normal; margin-top: 4px; word-break: break-all;">(${d.sourceProject})</div>
+                             </td>`;
+                    bRendered[d.group] = true;
+                }
+                
+                const currentPk = d.group + "_" + d.pm;
+                if (!pmRendered[currentPk]) {
+                    html += `<td class="td-pm" rowspan="${pmSpans[currentPk]}">${d.pm}</td>`;
+                    pmRendered[currentPk] = true;
+                }
+
+                // 根據狀態字串動態加入專屬的 CSS 顏色 Class
+                let statusColorClass = '';
+                if (d.statusText === 'On Time') {
+                    statusColorClass = 'status-ontime';
+                } else if (d.statusText === 'Delay') {
+                    statusColorClass = 'status-delay';
+                }
+
+                // --- AI 狀態顏色與樣式邏輯 ---
+                let aCol = '#475569';
+                let aPre = 'i';
+                let bgStyle = ''; 
+
+                if (isUnreasonable) { 
+                    aCol = '#dc2626'; 
+                    aPre = '⚠️'; 
+                    // 將原本整行的粉紅色移至這裡，僅針對不合理的 ai-box 進行背景與邊框著色
+                    bgStyle = 'background-color: #fce8e6; border-color: #fca5a5;';
+                } 
+                else if (d.ai_reasonable.includes('提醒')) { 
+                    aCol = '#ffffff'; 
+                    aPre = '💡';       
+                    bgStyle = 'background-color: #64748b;'; 
+                }
+                else if (d.ai_reasonable.includes('合理')) { 
+                    aCol = '#16a34a'; 
+                    aPre = '✅'; 
+                }
+
+                html += `
+                    <td class="td-task">${d.task}</td>
+                    <td><span class="status-text ${statusColorClass}">${d.statusText}</span></td>
+                    <td style="color: #475569; font-size: 13px; line-height: 1.3;">${d.comment}</td>
+                    <td>
+                        <div class="ai-box" style="${bgStyle}">
+                            <div class="ai-reason" style="color: ${aCol};">${aPre} ${d.ai_reasonable}</div>
+                            <div class="ai-summary" style="${d.ai_reasonable.includes('提醒') ? 'color: #f1f5f9;' : (isUnreasonable ? 'color: #7f1d1d;' : '')}">${d.ai_summary}</div>
+                        </div>
+                    </td>
+                </tr>`;
+            });
+            document.getElementById('table-body').innerHTML = html;
+        }
+
+        window.onload = async function() {
+            await fetchResources();
+            renderTable();
+        };
+    </script>
+</body>
+</html>
