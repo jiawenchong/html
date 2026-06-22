@@ -1,0 +1,363 @@
+{
+  "result": {
+    "report_date": "2026-06-22",
+    "progress": {
+      "K27-P2 建廠計劃": [
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "支援管路_K27-P2 管路配置(due date:06/19)",
+          "PROGRESS": "支撐架安裝進度80%",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此工項於 2026-06-19 到期，現僅回報支撐架安裝 80%，報告未說明剩餘 20% 的具體項目、責任單位與所需資源。請 PM 立即列出剩餘工作項目與數量、估計所需工時與資源、以及明確的完成日程。",
+          "SUMMARY": "已逾期(due date:06/19)，但在 06/16 (6天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "電力_VESDA/SCADA 佈線配管(due date:06/20)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-20 到期，但報表顯示無任何進度更新。請 PM 立刻說明目前障礙（例如人力、物料、外包或權限問題）、何時能啟動施工，以及可交付的明確完工日。",
+          "SUMMARY": "已逾期(due date:06/20)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_1F 天花板上 施工(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-15 到期，但報告無任何進度紀錄。請 PM 立即回報現場實際施工狀況、是否缺料或缺工，以及具體的恢復時程與完工日。",
+          "SUMMARY": "已逾期(due date:06/15)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "支援管路_K27預留點 銜接(due date:06/21)",
+          "PROGRESS": "5/4銜接完成",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】PROGRESS 記載 2026-05-04 已銜接完成，但專案仍標示為 Delay，最後更新日為 2026-05-06。請 PM 確認該項是否已完成驗收並正式結案；若已完成，附上驗收紀錄與交付證明；若未完成，說明差異原因並提供明確完工日。",
+          "SUMMARY": "已逾期(due date:06/21)，但在 05/06 (47天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_2F 高架地板 安裝(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-15 到期，但無任何進度說明。請 PM 說明目前施工阻礙、缺料或工期衝突，並提出可執行的時間表與負責單位。",
+          "SUMMARY": "已逾期(due date:06/15)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "K27支援K27-P2聯通管工程 (1F~4F) || 連通道(2F底) (due date:06/15)",
+          "PROGRESS": "1.K27內管線工程(4/1~4/31)<br>2.K27P2 1F 2F 3F啟用(6/1)",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】最後一次進度更新為 2026-03-31，PROGRESS 內容為過去排程，未反映目前實際完成百分比或剩餘項目。請 PM 重新提交最新施工百分比、已完成項目清單、未完成項目的阻礙與明確完成時程。",
+          "SUMMARY": "已逾期(due date:06/15)，但在 03/31 (83天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "電力_GIS 1F 一次側 佈線(due date:06/20)",
+          "PROGRESS": "基座工程進行中(含預埋管配置)<br>一次側配線預計6/5啟動",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】報告指出基座工程與預埋管配置，且曾預計於 2026-06-05 啟動一次側配線，但最後更新日為 2026-05-17，與目前逾期情況不符。請 PM 交代一次側實際啟動日、目前完成百分比與明確完工日。",
+          "SUMMARY": "已逾期(due date:06/20)，但在 05/17 (36天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_2F 高架下 施工(due date:06/20)",
+          "PROGRESS": "1. LPCW管路配置5%<br>2. LCDA管路配置2%",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】目前 LPCW/LCDA 管路配置僅完成 5% / 2%，最後更新為 2026-06-01，工作已落後。請 PM 說明造成低進度的主要原因、提出加速措施與明確恢復時程及負責單位。",
+          "SUMMARY": "已逾期(due date:06/20)，但在 06/01 (21天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_1F Epoxy 施工(due date:06/15)",
+          "PROGRESS": "6/16中塗完成",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【合理】報告指出中塗已於 2026-06-16 完成，對應原目標已有實質推進。請 PM 確認面漆排程、驗收標準與預計整體 epoxy 作業的完工日，以便確認交付時點。",
+          "SUMMARY": "已逾期(due date:06/15)，但在 06/16 (6天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "監控_跨棟光纖A 拉設(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-15 到期，但無任何進度更新。請 PM 說明光纖拉設的阻礙（如外包廠商、權限或物料問題）、預定開工日與明確完工日，並提供負責窗口。",
+          "SUMMARY": "已逾期(due date:06/15)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_3F 高架地板 安裝(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-15 到期，但報表未提供任何施工進度。請 PM 立即回報現場狀況、關鍵缺項與可執行的完工時程。",
+          "SUMMARY": "已逾期(due date:06/15)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_2F 外圍區 施作(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-15 到期，但無任何進度紀錄。請 PM 說明阻礙因素並提出明確的恢復時程與責任窗口。",
+          "SUMMARY": "已逾期(due date:06/15)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_4F 天花板上 施工(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-15 到期，但報告無進度更新。請 PM 立即說明目前作業狀態、是否需跨單位協調，並提供具體完工時程。",
+          "SUMMARY": "已逾期(due date:06/15)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_1F PR/PO(due date:06/20)",
+          "PROGRESS": "餘空調/高架地板/土建/氣體/消防/電力<br>(主管簽核中) 預估6/10 產出PO",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】PROGRESS 提到預估於 2026-06-10 產出 PO，但最後更新為 2026-05-26 且專案仍逾期。請 PM 提供已發出的 PO 明細、尚待發出的項目以及每項的確切發文日期。",
+          "SUMMARY": "已逾期(due date:06/20)，但在 05/26 (27天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_1F C型鋼 施工(due date:06/20)",
+          "PROGRESS": "6/14 C型鋼完成",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【合理】C 型鋼已於 2026-06-14 完成，對應關鍵結構工項有實質推進。請 PM 回報後續驗收與接續工序的安排（例如防鏽、定位與接合），並提供預計完工日。",
+          "SUMMARY": "已逾期(due date:06/20)，但在 06/16 (6天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "給排水_管道間 管路施作(due date:06/20)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】此項於 2026-06-20 到期，但無任何進度更新。請 PM 提供現場實況、涉及的施工項目、是否需追加物料或人力，以及明確完工時程。",
+          "SUMMARY": "已逾期(due date:06/20)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "平面建廠_PR/PO(due date:05/30)",
+          "PROGRESS": "1. 2F平面建廠皆已取得PO。<br>2. 1F & 3F PUR持續作業中。<br>3. 4F預算不足與 5F/6F 預算申請報告今日 已交由VPO IE作業中。",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【不合理】最後更新為 2026-04-14，PROGRESS 提及 2F 已取得 PO 但多數樓層仍未結案或預算待審。請 PM 提交最新 PO/預算狀態表、未解決的預算缺口以及每項的預定完成日。",
+          "SUMMARY": "已逾期(due date:05/30)，但在 04/14 (69天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "主建物_電梯施作(due date:06/16)",
+          "PROGRESS": "6/8宏舜電梯工程啟動",
+          "INDICATOR": "Delay",
+          "REASONABLE": "【合理】電梯工程已於 2026-06-08 啟動，對應到期日 2026-06-16 有實質推進；請 PM 回報目前施工階段（例如機房、曳引機安裝、調試）與下一個里程碑及預計驗收日。",
+          "SUMMARY": "已逾期(due date:06/16)，但在 06/16 (6天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "電力_GIS 1F-7F一次側 拉線(due date:06/25)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "On Time",
+          "REASONABLE": "【提醒】此工項將於 2026-06-25 到期，但報告顯示無進度更新；請 PM 確認是否按計畫執行並提供近期現場狀態或任何可能影響時程的風險事項。",
+          "SUMMARY": "即將到期(due date:06/25)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "支援管路_空壓 保壓測試(due date:06/25)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "On Time",
+          "REASONABLE": "【提醒】此工項將於 2026-06-25 到期，但報告未提供進度更新；請 PM 確認保壓測試是否已排程並回報測試窗口與預計完成日。",
+          "SUMMARY": "即將到期(due date:06/25)"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "支援管路_K27 管路配置(due date:06/25)",
+          "PROGRESS": "管路配置進度80%",
+          "INDICATOR": "On Time",
+          "REASONABLE": "【合理】K27 管路配置已完成 80%，對應到期日 2026-06-25，施工持續推進；請 PM 列出剩餘 20% 的具體項目、所需工作天數與預計完成日，並指出是否需外部協助以確保如期交付。",
+          "SUMMARY": "即將到期(due date:06/25)，但在 06/16 (6天前) 有做出進度更新"
+        },
+        {
+          "PROJECT": "K27-P2 建廠計劃",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "電力_機電顧問 檢測(due date:06/25)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "On Time",
+          "REASONABLE": "【提醒】此工項將於 2026-06-25 到期，但報告尚無進度更新；請 PM 確認檢測是否已排定、檢測負責窗口與預計回覆日，若有變動請即時說明。",
+          "SUMMARY": "即將到期(due date:06/25)"
+        }
+      ],
+      "FAB 5 Plan": [
+        {
+          "PROJECT": "FAB 5 Plan",
+          "PM_NAME": "MS Lee",
+          "TASK": "(主系統)_預算申請(due date:06/26)",
+          "PROGRESS": "預算WBS申請簽核中，預計6/17前完成",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/26)，但在 06/14 (8天前) 有做出進度更新",
+          "REASONABLE": "【提醒】預算WBS申請仍在簽核，PM 報稱預計 2026-06-17 前完成，但截至 2026-06-22 未見完成回報；上次摘要更新日為 2026-06-14。請 PM 立即釐清簽核目前阻礙、回報實際簽核狀態，若已完成提供核簽證明；若未完成請提出修訂後的明確完成日期、負責人與接下來的具體執行步驟。"
+        }
+      ],
+      "K3B(雙葉A)建廠計畫": [
+        {
+          "PROJECT": "K3B(雙葉A)建廠計畫",
+          "PM_NAME": "CC Chi",
+          "TASK": "化粧池_挖土支撐鐵板設置(due date:06/23)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/23)",
+          "REASONABLE": "【提醒】該工項目前無任何進度更新紀錄。請 PM 立即確認現場狀態（已開工/未開工/暫緩），若未開工說明主要原因並回報預計開工與完工日期、所需資源與負責人；若已開工請回報實際進度、施工問題與補救措施。"
+        }
+      ],
+      "三園區(Zone3)開發&建廠計畫": [
+        {
+          "PROJECT": "三園區(Zone3)開發&建廠計畫",
+          "PM_NAME": "CC Chi",
+          "TASK": "建照(due date:06/30)",
+          "PROGRESS": "建照圖說 42% (on going,5/7)",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 03/30 (84天前) 有做出進度更新",
+          "REASONABLE": "【提醒】建照圖說仍在進行，記錄顯示目前 42%（PROGRESS 標註 2026-05-07），但 SUMMARY 最後更新日為 2026-03-30，資訊不一致且缺乏近期里程碑回報。請 PM 提供最新完成百分比、目前技術卡關點、預計取得建照的確切日期，以及下一階段關鍵活動的負責人與時程。"
+        },
+        {
+          "PROJECT": "三園區(Zone3)開發&建廠計畫",
+          "PM_NAME": "CC Chi",
+          "TASK": "出流水計劃準文(due date:06/30)",
+          "PROGRESS": "2/26 掛件申請<br>3/19 市府水利局進行第一次現勘與審議，有提出意見但問題不大，技師預估4/30前回覆意見",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 03/23 (91天前) 有做出進度更新",
+          "REASONABLE": "【提醒】出流水計劃已於 2026-02-26 申請並在 2026-03-19 完成第一次審議，技師曾預估 2026-04-30 前回覆，但至 2026-06-22 尚未見後續結果。請 PM 立即確認審查回覆是否已收到，若尚未收到請列出阻礙或補件項目、負責單位與明確時程以利追蹤。"
+        }
+      ],
+      "K18B建廠計畫": [
+        {
+          "PROJECT": "K18B建廠計畫",
+          "PM_NAME": "CC Chi",
+          "TASK": "純水_PR/PO開立(due date:06/30)",
+          "PROGRESS": "1.規劃設計純水系統on going 2.2/12提供投控計劃書 3.完成投控計劃書資料 4.投控資料審閱",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 07/01 (356天前) 有做出進度更新",
+          "REASONABLE": "【提醒】純水系統規劃仍為設計與投控文件準備階段（紀錄含 2026-02-12 文件提供），但最後摘要更新日標示為 2025-07-01，距今時間長。請 PM 釐清目前文件審查進度、是否有審查意見需回覆，並提出可執行的文件遞交或審查完成時程與負責人。"
+        },
+        {
+          "PROJECT": "K18B建廠計畫",
+          "PM_NAME": "CC Chi",
+          "TASK": "廢水_PR/PO開立(due date:06/30)",
+          "PROGRESS": "1.規劃設計廢水系統on going2.2/12提供投控計劃書 3.完成投控計劃書資料 4.投控資料審閱",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 07/01 (356天前) 有做出進度更新",
+          "REASONABLE": "【提醒】廢水系統仍在規劃與投控文件階段，最近可查之文件提交紀錄為 2026-02-12，但 SUMMARY 顯示最後更新為 2025-07-01。請 PM 說明目前審查是否有缺件或待回覆意見，並回報明確的完成時程與負責人。"
+        },
+        {
+          "PROJECT": "K18B建廠計畫",
+          "PM_NAME": "CC Chi",
+          "TASK": "抽氣_PR/PO開立(due date:06/30)",
+          "PROGRESS": "1.規劃設計抽氣系統on going 2.2/12提供投控計劃書 3.完成投控計劃書資料 4.投控資料審閱",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 07/01 (356天前) 有做出進度更新",
+          "REASONABLE": "【提醒】抽氣系統相關投控文件仍在準備與審閱階段，最新紀錄顯示文件提供時間為 2026-02-12，但最後摘要更新日為 2025-07-01。請 PM 說明文件審核現況、是否需補件或回覆審查意見，並提出具體完成日期與負責人。"
+        }
+      ],
+      "機電 前期規劃&建廠計畫": [
+        {
+          "PROJECT": "機電 前期規劃&建廠計畫",
+          "PM_NAME": "Sean Lin",
+          "TASK": "雜照PO進度(due date:05/31)",
+          "PROGRESS": "6/16 會議結果<br>參與單位：PUR/FEE/錫興<br>會議結論：<br>1. 合約內容依會議意見修正<br>2. 機電標單重新Review部分項目數量與金額。",
+          "INDICATOR": "Delay",
+          "SUMMARY": "已逾期(due date:05/31)，但在 06/22 (今天) 有做出進度更新",
+          "REASONABLE": "【不合理】該項目已逾期，會議紀錄僅指出合約內容需修正與標單重新檢視，但 PM 未提供修正完成時間表或核簽進度。請 PM 立即回報合約修正的負責人與預定完成日、核簽時程，並列出若需管理層決策的事項與期望回應時限。"
+        },
+        {
+          "PROJECT": "機電 前期規劃&建廠計畫",
+          "PM_NAME": "Sean Lin",
+          "TASK": "申報雜照開工(due date:06/30)",
+          "PROGRESS": "6/5提送開工資料至園管處",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 06/08 (14天前) 有做出進度更新",
+          "REASONABLE": "【提醒】已於 2026-06-05 將開工資料送達園區管理處，請 PM 回報園區的處理情形（受理、補件或核准）及預期取得開工許可的日期；如被要求補件，請列出補件項目、負責人與回覆期限。"
+        },
+        {
+          "PROJECT": "機電 前期規劃&建廠計畫",
+          "PM_NAME": "Sean Lin",
+          "TASK": "整體工期進度表(due date:06/30)",
+          "PROGRESS": "七月連續壁進場，請錫興提出整體工期進度表",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 06/08 (14天前) 有做出進度更新",
+          "REASONABLE": "【提醒】確認七月將進場連續壁並已要求承商提出整體工期表，但目前未見承商提交或 PM 的審核版。請 PM 追催承商提交審核版，並於回報中夾帶審核後之主里程碑（含開始/完成日）、關鍵工項及各項負責單位。"
+        }
+      ],
+      "RW建廠工程": [
+        {
+          "PROJECT": "RW建廠工程",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "主建物_CUB燈照開工(due date:06/20)",
+          "PROGRESS": "建管承辦指出 需要合併拆燈(之前農地套縫拆除位註銷)之申請, 調整及切結圖說， 此部分已請Dir.Leon協助出面,約經發局與建管討論解套方式",
+          "INDICATOR": "Delay",
+          "SUMMARY": "已逾期(due date:06/20)，但在 05/05 (48天前) 有做出進度更新",
+          "REASONABLE": "【不合理】該工項已逾期（due date:06/20），目前 PROGRESS 僅記錄需 Dir.Leon 協助與相關單位討論拆燈及申請方式，未給出可執行的里程碑、負責單位與明確完成期限。最近一次 SUMMARY 更新為 2026-05-05，至報告日 2026-06-22 已超過 7 天未見後續回報。請 PM 立即說明下一步可執行的具體時程（例如：何時完成拆裝圖與切結、何時送件、何時可取得核准）並指明負責人與可交付成果日期。"
+        },
+        {
+          "PROJECT": "RW建廠工程",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "發包_PR開立(due date:06/20)",
+          "PROGRESS": "1.設備類除冰機/161KV設備尚未下PO,其餘已完成<br>2.工程類6/8-6/10開立PR",
+          "INDICATOR": "Delay",
+          "SUMMARY": "已逾期(due date:06/20)，但在 06/06 (16天前) 有做出進度更新",
+          "REASONABLE": "【不合理】該項目已逾期（due date:06/20），PROGRESS 提到部分設備尚未下 PO 且工程類 PR 預計於 6/8-6/10 開立，但未列明何時會完成 PO 下達、未說明長料交期及是否可趕上整體時程。最近一次 SUMMARY 為 2026-06-06，至報告日 2026-06-22 已超過 7 天。請 PM 盤點關鍵長料與其供應交期、明確寫出每項下 PO 的預計日期與負責人，並說明若 PO 延遲對總工期的影響與因應時間表。"
+        },
+        {
+          "PROJECT": "RW建廠工程",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "主建物_P1基樁(due date:06/15)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "Delay",
+          "SUMMARY": "已逾期(due date:06/15)",
+          "REASONABLE": "【不合理】該工項已逾期（due date:06/15），且 PROGRESS 標示「無進度更新」，目前沒有任何具體處置計畫或短期可執行作為。請 PM 立即說明延誤原因、現場阻礙情況，並提出具體可執行的短期措施、負責人及明確完成日期，附上簽署的執行時間表。"
+        },
+        {
+          "PROJECT": "RW建廠工程",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "PR分急迫性開立(due date:06/30)",
+          "PROGRESS": "因人力調撥支援,工程類將於6/8-6/10開出<br>平面建廠將於6/10開立Layout說明會 後續將估算預算及申請WBS",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 06/06 (16天前) 有做出進度更新",
+          "REASONABLE": "【提醒】目標日為 06/30，PROGRESS 已說明人力調撥與預計 6/8-6/10 開立工程類 PR，並於 6/10 舉行 Layout 說明會；但最近一次 SUMMARY 為 2026-06-06，至報告日 2026-06-22 已超過 7 天未再回報。請 PM 補充 6/10 說明會結果、已開立之 PR 清單與金額估算，並更新後續 WBS 的預計里程碑與負責單位。"
+        },
+        {
+          "PROJECT": "RW建廠工程",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "發包_PR/PO(due date:06/30)",
+          "PROGRESS": "主辦review初版圖面料單<br>預估5/30簽核至採購",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)，但在 05/18 (35天前) 有做出進度更新",
+          "REASONABLE": "【提醒】目標日 06/30，PROGRESS 顯示已進行初版圖面與料單審核，並預估 05/30 完成簽核送採購；但最近一次 SUMMARY 為 2026-05-18，至報告日 2026-06-22 已逾 7 天未見後續。請 PM 確認 05/30 是否完成簽核、目前 PO 發出狀態、若未完成的具體卡點為何，並回報明確的 PO 發出時程與負責人。"
+        },
+        {
+          "PROJECT": "RW建廠工程",
+          "PM_NAME": "Asheng Cheng",
+          "TASK": "工程規劃-建造執照申請(due date:06/30)",
+          "PROGRESS": "無進度更新",
+          "INDICATOR": "On Time",
+          "SUMMARY": "即將到期(due date:06/30)",
+          "REASONABLE": "【提醒】目標日為 06/30，但 PROGRESS 無進度更新，PM 需說明建造執照申請目前文件準備狀態、是否已送件或預計送件日期，並提供後續審查時程與可交付里程碑及負責人。"
+        }
+      ]
+    }
+  }
+}
