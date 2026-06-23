@@ -7,10 +7,19 @@ def clean_text(text):
     return str(text).replace('\n', '<br>').replace('"', '&quot;')
 
 def generate_notes_report():
-    json_path = r"\\10.10.51.67\d$\FAC_Web\agent_platform\html_files\data\building_aboard.json"
-    
-    if not os.path.exists(json_path):
-        print(f"❌ 找不到 JSON 檔案: {json_path}")
+    # 預設讀取正式環境的網路磁碟路徑；若不存在則退回腳本所在目錄的本機檔案，
+    # 讓這支程式在本機也能直接吃下 building_aboard.json
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    candidate_paths = [
+        r"\\10.10.51.67\d$\FAC_Web\agent_platform\html_files\data\building_aboard.json",
+        os.path.join(base_dir, "building_aboard.json"),
+        os.path.join(base_dir, "data", "building_aboard.json"),
+    ]
+    json_path = next((p for p in candidate_paths if os.path.exists(p)), None)
+    if not json_path:
+        print("❌ 找不到 JSON 檔案，已嘗試以下路徑：")
+        for p in candidate_paths:
+            print(f"   - {p}")
         return
 
     with open(json_path, 'r', encoding='utf-8') as f:
@@ -19,13 +28,29 @@ def generate_notes_report():
     res = data.get("result", {})
     report_date = res.get("report_date", "--")
     progress_data = res.get("progress", {})
-    BUILDING_ORDER = ["K27-P2", "KL I", "FAB 5", "RW", "KL II","楠電","K18B","Zone3","K3B"]
-    
-    rows_html = ""
+    BUILDING_ORDER = ["K27-P2", "KL I", "FAB 5", "RW", "KL II", "楠電", "K18B", "Zone3", "K3B"]
+
+    # 先依 BUILDING_ORDER 對應 JSON key（保留排序與顯示名稱），
+    # 再把沒被對應到的 key 補在後面，確保 building_aboard.json 內所有專案
+    # 都會被渲染（即使標題與設定不一致，例如「桃電 前期規劃&建廠計劃」也不會漏掉）
+    used_keys = set()
+    groups = []  # (顯示名稱, JSON key)
     for b_target in BUILDING_ORDER:
-        matched_key = next((k for k in progress_data.keys() if b_target in k and not (b_target == "KL I" and "KL II" in k)), None)
-        if not matched_key: continue
-        
+        matched_key = next(
+            (k for k in progress_data.keys()
+             if k not in used_keys and b_target in k
+             and not (b_target == "KL I" and "KL II" in k)),
+            None
+        )
+        if matched_key:
+            used_keys.add(matched_key)
+            groups.append((b_target, matched_key))
+    for k in progress_data.keys():
+        if k not in used_keys:
+            groups.append((k, k))
+
+    rows_html = ""
+    for b_target, matched_key in groups:
         items = progress_data[matched_key]
         row_count = len(items)
         

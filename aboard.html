@@ -236,6 +236,7 @@
 
     <script>
         let MAIN_DATA = null;
+        let GROUPS = [];
         // 前端宣告顯示的新名稱
         const BUILDING_ORDER = ["K27-P2", "K61-P1(KL I)", "K71(FAB 5)", "K51(RW)", "K61-P2(KL II)","楠電(K19A)","K18B","Zone 3","K3B"];
 
@@ -254,98 +255,143 @@
 
         async function fetchResources() {
             const timestamp = Date.now();
-            try {
-                const mainRes = await fetch(`data/building_aboard.json?t=${timestamp}`, { cache: 'no-store' });
-                const text = await mainRes.text();
-                const cleanText = text.includes('<script>') ? text.slice(0, text.indexOf('<script>')).trim() : text;
-                MAIN_DATA = JSON.parse(cleanText);
-                
-                // 初始化廠區篩選下拉選單
-                const filter = document.getElementById('building-filter');
-                BUILDING_ORDER.forEach(b => {
-                    const opt = document.createElement('option');
-                    opt.value = b;
-                    opt.textContent = b;
-                    filter.appendChild(opt);
-                });
-
-            } catch (e) {
-                console.error("Data load failed:", e);
+            // 兼容兩種部署位置：專案根目錄 與 data/ 子目錄
+            const candidatePaths = [
+                `building_aboard.json?t=${timestamp}`,
+                `data/building_aboard.json?t=${timestamp}`
+            ];
+            for (const path of candidatePaths) {
+                try {
+                    const mainRes = await fetch(path, { cache: 'no-store' });
+                    if (!mainRes.ok) continue;
+                    const text = await mainRes.text();
+                    const cleanText = text.includes('<script>') ? text.slice(0, text.indexOf('<script>')).trim() : text;
+                    MAIN_DATA = JSON.parse(cleanText);
+                    break;
+                } catch (e) {
+                    console.warn(`資料讀取失敗: ${path}`, e);
+                }
+            }
+            if (!MAIN_DATA) {
+                console.error("所有資料路徑皆讀取失敗");
                 MAIN_DATA = { result: { report_date: "ERROR", progress: {} } };
             }
+
+            // 依 JSON 實際內容計算要顯示的廠區群組
+            computeGroups();
+
+            // 初始化廠區篩選下拉選單（依實際存在的群組，而非寫死的清單）
+            const filter = document.getElementById('building-filter');
+            GROUPS.forEach(g => {
+                const opt = document.createElement('option');
+                opt.value = g.label;
+                opt.textContent = g.label;
+                filter.appendChild(opt);
+            });
+        }
+
+        // 依 BUILDING_ORDER 設定與 JSON 實際 key 做模糊比對，找出對應的專案 key
+        function findMatchKey(target, jsonKeys, used) {
+            return jsonKeys.find(k => {
+                if (used.has(k)) return false;
+
+                if (target === "K61-P2(KL II)") {
+                    return k.includes("KL II") && k.includes("2期");
+                }
+
+                if (target.includes("KL I") && !target.includes("KL II") && k.includes("KL II")) return false;
+                if (k.includes("KL I") && !k.includes("KL II") && target.includes("KL II")) return false;
+
+                const targetTokens = target.match(/[A-Za-z0-9一-龥]+/g) || [];
+                const validTokens = targetTokens.filter(token => token.length > 1 || token === "I" || token === "II");
+
+                return validTokens.some(token => k.includes(token));
+            });
+        }
+
+        // 計算實際要渲染的廠區群組：
+        //  1) 先依 BUILDING_ORDER 對應 JSON key（保留排序、顯示名稱與超連結）
+        //  2) 再把 JSON 裡未被對應到的 key 補在後面，確保 JSON 內容都能完整渲染
+        //     （例如標題與前端設定不一致的專案，如「桃電 前期規劃&建廠計劃」）
+        function computeGroups() {
+            GROUPS = [];
+            if (!MAIN_DATA || !MAIN_DATA.result) return;
+            const progress = MAIN_DATA.result.progress || {};
+            const jsonKeys = Object.keys(progress);
+            const used = new Set();
+
+            // 1) 先依 BUILDING_ORDER 對應 JSON key（保留排序、顯示名稱與超連結）
+            BUILDING_ORDER.forEach(target => {
+                const matchedKey = findMatchKey(target, jsonKeys, used);
+                if (matchedKey && progress[matchedKey] && progress[matchedKey].length) {
+                    used.add(matchedKey);
+                    GROUPS.push({ label: target, sourceKey: matchedKey, url: URL_MAP[target] || '#' });
+                }
+            });
+
+            // 2) 再把 JSON 裡未被對應到的 key 補在後面，確保 JSON 內容都能完整渲染
+            jsonKeys.forEach(k => {
+                if (!used.has(k) && progress[k] && progress[k].length) {
+                    GROUPS.push({ label: k, sourceKey: k, url: URL_MAP[k] || '#' });
+                }
+            });
         }
 
         function renderTable() {
             if (!MAIN_DATA || !MAIN_DATA.result) return;
-            
+
             const res = MAIN_DATA.result;
             const progress = res.progress || {};
-            const jsonKeys = Object.keys(progress);
-            
+
             // 獲取當前所有篩選器的值
             const filterBuilding = document.getElementById('building-filter').value;
             const filterStatus = document.getElementById('status-filter').value;
             const filterAi = document.getElementById('ai-filter').value;
-            
+
             document.getElementById('report-date').innerText = res.report_date || '--';
 
             let flattened = [];
-            BUILDING_ORDER.forEach(target => {
+                        GROUPS.forEach(g => {
                 // 1. 廠區篩選過濾
-                if (filterBuilding !== "ALL" && target !== filterBuilding) return;
+                if (filterBuilding !== "ALL" && g.label !== filterBuilding) return;
 
-                // 精準對應與模糊解析比對
-                let matchedKey = jsonKeys.find(k => {
-                    if (target === "K61-P2(KL II)") {
-                        return k.includes("KL II") && k.includes("2期");
+                const items = progress[g.sourceKey] || [];
+                items.forEach(item => {
+                    let mappedStatus = 'On Time';
+                    if (item.INDICATOR && (item.INDICATOR.includes('紅') || item.INDICATOR.includes('黃'))) {
+                        mappedStatus = 'Delay';
+                    } else if (item.INDICATOR && item.INDICATOR.includes('綠')) {
+                        mappedStatus = 'On Time';
+                    } else {
+                        mappedStatus = item.INDICATOR || '-';
                     }
 
-                    if (target.includes("KL I") && !target.includes("KL II") && k.includes("KL II")) return false;
-                    if (k.includes("KL I") && !k.includes("KL II") && target.includes("KL II")) return false;
+                    // 2. 進度狀態篩選過濾
+                    if (filterStatus !== "ALL" && mappedStatus !== filterStatus) return;
 
-                    const targetTokens = target.match(/[A-Za-z0-9\u4e00-\u9fa5]+/g) || [];
-                    const validTokens = targetTokens.filter(token => token.length > 1 || token === "I" || token === "II");
-
-                    return validTokens.some(token => k.includes(token));
-                });
-
-                if (matchedKey && progress[matchedKey]) {
-                    progress[matchedKey].forEach(item => {
-                        let mappedStatus = 'On Time';
-                        if (item.INDICATOR && (item.INDICATOR.includes('紅') || item.INDICATOR.includes('黃'))) {
-                            mappedStatus = 'Delay';
-                        } else if (item.INDICATOR && item.INDICATOR.includes('綠')) {
-                            mappedStatus = 'On Time';
+                    // 3. AI 判斷篩選過濾
+                    const aiReasonable = item.REASONABLE || '';
+                    if (filterAi !== "ALL") {
+                        if (filterAi === "合理") {
+                            if (aiReasonable.includes("不合理") || !aiReasonable.includes("合理")) return;
                         } else {
-                            mappedStatus = item.INDICATOR || '-';
+                            if (!aiReasonable.includes(filterAi)) return;
                         }
+                    }
 
-                        // 2. 進度狀態篩選過濾
-                        if (filterStatus !== "ALL" && mappedStatus !== filterStatus) return;
-
-                        // 3. AI 判斷篩選過濾
-                        const aiReasonable = item.REASONABLE || '';
-                        if (filterAi !== "ALL") {
-                            if (filterAi === "合理") {
-                                if (aiReasonable.includes("不合理") || !aiReasonable.includes("合理")) return;
-                            } else {
-                                if (!aiReasonable.includes(filterAi)) return;
-                            }
-                        }
-
-                        // 通過所有篩選才推入顯示陣列
-                        flattened.push({
-                            group: target,
-                            sourceProject: matchedKey,
-                            pm: item.PM_NAME || '-',
-                            task: item.TASK || '-',
-                            statusText: mappedStatus,
-                            comment: item.PROGRESS || '',
-                            ai_summary: item.SUMMARY || '',
-                            ai_reasonable: aiReasonable
-                        });
+                    // 通過所有篩選才推入顯示陣列
+                    flattened.push({
+                        group: g.label,
+                        sourceProject: g.sourceKey,
+                        url: g.url,
+                        pm: item.PM_NAME || '-',
+                        task: item.TASK || '-',
+                        statusText: mappedStatus,
+                        comment: item.PROGRESS || '',
+                        ai_summary: item.SUMMARY || '',
+                        ai_reasonable: aiReasonable
                     });
-                }
+                });
             });
 
             if (flattened.length === 0) {
@@ -372,7 +418,7 @@
                 html += `<tr>`;
                 
                 if (!bRendered[d.group]) {
-                    const targetUrl = URL_MAP[d.group] || '#';
+                    const targetUrl = d.url || URL_MAP[d.group] || '#';
                     
                     html += `<td class="td-building" rowspan="${bSpans[d.group]}">
                                 <a href="${targetUrl}" target="_blank" class="building-link">
